@@ -122,5 +122,12 @@ def main():
   sales_columns = get_last_5_entries_sales()
   stock_data = calculate_stock_data(sales_columns)
   update_worksheet(stock_data, "stock")
+  return stock_data
 
-main()
+stock_data = main()
+def get_stock_values(data):
+  headings = SHEET.worksheet("stock").get_all_values()[0]
+  return {heading: value for (heading, value) in zip(headings, data)}
+
+stock_values = get_stock_values(stock_data)
+print(stock_values)
